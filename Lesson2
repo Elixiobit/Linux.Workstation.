@@ -1,0 +1,27 @@
+1.
+    ls -la /ect
+    less /etc/subgid
+    cat /etc/wgetrc
+    ls -la /proc
+    ls -la /home    ls -la ../
+2.
+    touch file{1..2}
+    echo 'Hello' > file1
+    echo 'Good morning' > file2
+    cat file2 >> file1
+    cat file1
+        Hello
+        Good morning
+    cp file1 fileNew
+3.
+    touch fileOne
+    echo 'fileTwo' > fileTwo
+    nano fileTree
+    mkdir ~/newDir
+    mv fileOne fileTwo fileTree ~/newDir
+    cd ../
+    rm -r test
+4. 
+	ls -a | find ~ -name '.*' > countFile.txt | wc -l countFile.txt
+6.
+    ps aux - вывести все процессы
