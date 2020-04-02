@@ -22,9 +22,9 @@
     cd ../
     rm -r test
 4. 
-    ls -a | find ~ -name '.*' > countFile.txt | wc -l countFile.txt
+    find ~/ -maxdepth 1 -name '.*'
 5.
-    cat -A $(find /etc -type f) 1> /tmp/all 2> ~/error | wc -l ~/error - 39 файлов не удалось просмотреть. 
+    cat /etc/* 1> /tmp/all 2> ~/error | wc -l ~/error - 127 файлов не удалось просмотреть. 
 6.
     ps aux - вывести все процессы
     ps -U gdm -u 
