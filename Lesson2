@@ -1,0 +1,38 @@
+1.
+    ls -la /ect
+    less /etc/subgid
+    cat /etc/wgetrc
+    ls -la /proc
+    ls -la /home    ls -la ../
+2.
+    touch file{1..2}
+    echo 'Hello' > file1
+    echo 'Good morning' > file2
+    cat file2 >> file1
+    cat file1
+        Hello
+        Good morning
+    cp file1 fileNew
+3.
+    touch fileOne
+    echo 'fileTwo' > fileTwo
+    nano fileTree
+    mkdir ~/newDir
+    mv fileOne fileTwo fileTree ~/newDir
+    cd ../
+    rm -r test
+4. 
+    find ~/ -maxdepth 1 -name '.*'
+5.
+    cat /etc/* 1> /tmp/all 2> ~/error | wc -l ~/error - 127 файлов не удалось просмотреть. 
+6.
+    ps aux - вывести все процессы
+    ps -U gdm -u 
+    ps -C <название процесса>
+7.
+    kill -1 13712 - закрыла а содержимое записало
+    kill -9 13912 - закрыла принудительно, все изменение убило
+    kill -11 13941 - Ошибка сегментироваания
+    kill -15 13712 - закрытие с возможной записью.
+9.
+    mkdir -p ./img/20{15..20}/{01..12}
