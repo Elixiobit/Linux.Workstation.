@@ -1,0 +1,22 @@
+1.
+	echo elemet{1..20} > file1
+	cp file1 file2
+	ln -s file1 file3
+	ls -ila
+	rm file1
+	file2 - это копия, вывелся.
+	file3 - т.к. ссылка была Символическая, сообщил, что файла нет.
+	file4 - ссылка жесткая,вывелся.
+2.
+	mv file2 newfile2 
+	mv file4 newfile4
+	ln -s newfile2 newfile3
+	mv newfile3 ~/ - ссылка не работает
+3.
+	touch file{1..2}
+	chmod ugo=r,ug=rw file1
+	chmod u=rw,go=- file2
+	chmod 600 file2
+4.
+	sudo useradd -m -G sudo -s /bin/bash ilya
+	sudo passwd ilya
