@@ -1,2 +1,20 @@
 #!/bin/bash
-TODO
+#lesson5
+#5.1
+#
+echo '#Вы сдесь' $(pwd)
+echo '# Укажите абсолютный или относительный путь к файлу'
+read i
+echo '#Текст до'
+cat $i
+echo '#Текст после удаление пустых строк и замены маленьких символов на большие.'
+sed '/^$/d' $i | tr -s   [:lower:] [:upper:]
+
+#5.2
+tail -1f /var/log/auth.log  | grep 'authentication failure\b'
+
+read last_line
+
+echo $last_line
+
+
