@@ -1,0 +1,100 @@
+#!/bin/bash
+#lesson5
+#5.1
+#
+usage(){    # функция выводит подсказку
+	cat <<EOF
+Helper text
+Examples:
+	$0 --help
+	$0 file1
+EOF
+}
+
+[[ $@ =~ (--help|-h).* ]] && usage && exit 0
+[[ $# == 0 ]] && echo "File not specified" && usage && exit 1
+[[ $# -gt 1 ]] && echo "Too many files" && usage && exit 2
+[[ ! -f $@ ]] && echo "File does not exist" && usage && exit 3 #ошибки
+
+sed -i's/\(.*\)/\U\1/; /^[[:blank:]]*$/d' $@  # делаетсимволызаглавными и убирает пустые сточки (с табами)
+#END
+#
+#5.2
+usage(){
+	echo 'Hi There'
+}	
+
+tail -f /var/log/auth.log  | grep 'authentication failure' # мониторит файл auth.log на ошибку авторизации.
+#END
+#
+#5.3
+usage(){
+	cat <<EOF
+Script will create files on the specified directory and assign execute permissions to '.sh' files. If file is already there, you will be warned.
+Usage: $0 -d <directory> [file(s)]
+Examples:
+
+   $0 -d /tmp/task_3
+   $0 -d file1 file2 file3
+   $0 -d /tmp/task_3 file1 file2.sh file3
+   $0 -d /tmp/task_3 -d /tmp/task_3_2 file1 file2.sh file3  
+   $0 file1 file2.sh file3 -d /tmp/task_3_2
+EOF
+}
+
+while [[ $# -gt 0 ]] ; do
+  case $1 in
+	--help|-h)
+	usage
+        exit 0
+  ;;
+	-d)
+	DIR+=( $2 )
+	shift 2
+  ;;
+        *)
+        [[ $1 =~ .*/.* ]] && echo "File name '$1' contains '/' char" && exit 1
+        FILES+=( $1 )
+        shift
+  ;;
+  esac
+done
+
+(( ${#DIR[@]} == 0 )) && echo "Directory not specified" && exit 2
+(( ${#FILES[@]} == 0 )) && echo "Files not specified" && exit 3
+(( ${#DIR[@]} > 1 )) && echo "More than one directory specified '${DIR[@]}'" && exit 4
+
+mkdir -p $DIR
+
+for f in ${FILES[@]} ; do
+	file=$DIR/$f
+	if [[ -f $file ]] ; then
+	   echo -n "File '$file' already exists"
+	else
+	   echo -n "Creating file '$file'"
+	   date > $file
+	   [[ $file =~ .+\.sh$ ]] && echo -n " and adding exec permissions" && chmod +x $file
+	
+        fi
+        echo
+done
+#END	  
+
+
+
+#echo '#Вы сдесь' $(pwd)
+#echo '# Укажите абсолютный или относительный путь к файлу'
+#read i
+#echo '#Текст до'
+#cat $i
+#echo '#Текст после удаление пустых строк и замены маленьких символов на большие.'
+#sed '/^$/d' $i | tr -s   [:lower:] [:upper:]
+
+#5.2
+#tail -1f /var/log/auth.log  | grep 'authentication failure\b'
+
+#read last_line
+
+#echo $last_line
+
+
