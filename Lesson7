@@ -1,0 +1,19 @@
+7.1
+FROM python:alpine
+
+RUN apk add git ; git clone https://github.com/mtuktarov/linux_goodies.git /home/ilyasu/docker-image7 ; \
+    pip install -Ur /home/ilyasu/docker-image7/docker/django-test-app/requirements.txt && rm -rf /home/ilyasu/docker-image7/docker/django-test-app/requirements.txt
+    
+CMD ["/home/ilyasu/docker-image7/docker/django-test-app/manage.py", "runserver", "0.0.0.0:8080"]
+
+
+
+
+7.2
+docker run -ti -v $(pwd)/db.sqlite3:/home/ilyasu/docker-image7/docker/django-test-app/db.sqlite3 django:latest /home/ilyasu/docker-image7/docker/django-test-app/manage.py migrate
+
+7.3
+docker run -ti -p 80:8080 -v $(pwd)/db.sqlite3:/home/ilyasu/docker-image7/docker/django-test-app/db.sqlite3 django:latest
+
+7.4
+Создал аккаунт, по жамкал...
